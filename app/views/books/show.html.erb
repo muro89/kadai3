@@ -1,12 +1,61 @@
-<div>
-  <%= image_tag @book.get_image %>
-  <p>本：<%= @book.title %></p>
-  <p>感想：<%= @book.body %></p>
+ <div class="container">
+  <div class="row">
+    <div class="col-md-3 ">
+      <h2>User info</h2>
+       <%= image_tag @user.get_profile_image(100,100) %>
+      <table>
+        <tbody>
+          <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= @user.introduction %><th>
+          </tr>
+        </tbody>
+      </table>
+
+      <% if @user == current_user %>
+
+      <%= link_to edit_user_path(current_user.id),  class:"btn btn-outline-secondary btn-block" do %>
+       <i class="fas fa-user-cog"></i>  <% end %>
+       <% end %>
+
+
+       <h2>New book</h2>
+
+        <%= form_with model: @book  ,method: :post do |f| %>
+
+
+
+        <h4>Title</h4>
+        <%= f.text_field :title %>
+       <h4>Opinion</h4>
+        <%= f.text_area :body %>
+       <%= f.submit 'Create Book' ,class: 'btn btn-success' %>
+
+        <% end %>
+
+    </div>
+<div class="col-md-8 offset-md-1">
+
+<h2>Books</h2>
+
+
+<table class="table">
+  <tbody>
+ 
+ <td><%= image_tag @book.get_image %>
+ <%= @book.user.name %></td>
+  <td><%= @book.title %></td>
+  <td><%= @book.body %></td>
+  <td><%= link_to  'edit' , edit_book_path, class: 'btn btn-success'  %> </td>
+ 
   
-  <p>投稿ユーザー画像：<%= image_tag book.user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @book.user.name %></p>
-  <p>投稿日：<%= @book.created_at.strftime('%Y/%m/%d') %></p>
-    <% if @book.user == current_user %>
-    <%= link_to "削除", book_path(@book), method: :delete %>
-  <% end %>
+   
+ </tbody>
+</table>
+</div>
+</div>
 </div>
