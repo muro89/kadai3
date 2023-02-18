@@ -19,7 +19,7 @@
 
       <% if @user == current_user %>
 
-      <%= link_to edit_user_path, class:"btn btn-outline-secondary btn-block" do %>
+      <%= link_to edit_user_path(@userid), class:"btn btn-outline-secondary btn-block" do %>
        <i class="fas fa-user-cog"></i>  <% end %>
        <% end %>
 
@@ -40,24 +40,24 @@
     </div>
 <div class="col-md-8 offset-md-1">
 
-<h2>Books</h2>
+<h2>Users</h2>
 
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Opinion</th>
+      <th scope="col">image</th>
+      <th scope="col">name</th>
 
 
     </tr>
   </thead>
   <tbody>
-    <% @books.each do |book| %>
+    <% @users.each do |user| %>
     <tr>
-      <th>   <%= image_tag @user.get_profile_image(100,100) %>  </th>
-      <td><%= link_to book.title, book_path(book.id)%></td>
-      <td><%= book.body %></td>
+      <th>   <%= image_tag user.get_profile_image(100,100) %>  </th>
+      <td><%= user.name %></td>
+      <td><%=  link_to  'show', user_path(user.id) %></td>
 
     </tr>
   <% end %>
